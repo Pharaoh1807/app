@@ -7,11 +7,15 @@ const path = require('path')
 const app = express();
 const port = 3000;
 
+const route = require('./routes')
 
 app.use(express.static(path.join(__dirname, 'resource/publice')));
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
 
 // HTTP Logger
-app.use(morgan('combined'));
+// app.use(morgan('combined'));
 
 //templet engine
 
@@ -20,14 +24,12 @@ app.engine('.hbs', handlebars({extname: '.hbs'}));
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resource/views'))
 
-//API
-app.get('/', (req, res) => {
-  res.render('home');
-});
+//Routes init
 
-app.get('/news', (req, res) => {
-  res.render('news');
-});
+route(app);
+
+
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
