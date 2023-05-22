@@ -35,6 +35,7 @@
     "husky": "^8.0.3",
     "lint-staged": "^13.2.2",
     "mongoose": "^7.2.0",
+    "mongoose-slug-generator": "^1.0.4",
     "morgan": "^1.10.0",
     "nextjs": "^0.0.3",
     "node-sass": "^9.0.0",

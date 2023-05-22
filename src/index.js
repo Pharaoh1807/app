@@ -26,12 +26,12 @@ app.use(express.json());
 app.engine('hbs', handlebars());
 app.engine('.hbs', handlebars({ extname: '.hbs' }));
 app.set('view engine', 'hbs');
-app.set('views', path.join(__dirname, 'resource/views'));
+app.set('views', path.join(__dirname, 'resource','views'));
 
 //Routes init
 
 route(app);
 
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
+    console.log(`App listening on port ${port}`);
 });
