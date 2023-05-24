@@ -37,12 +37,31 @@ class CourseController {
         .catch(err => {
             
         })
+           
+    }
+        
+        // [GET] /courses/:id/edit
+     edit(req, res, next) {
 
-      
+        courses.findOne({
+            _id: req.params.id
+        })
+
+        .then(course => res.render('courses/edit', {course: mongooseToObject(course)}) )
+        .catch (next)     
+          
         
-        
-        
-        
+    }
+    // [PUT] /courses/:id
+    update (req, res, next) {
+        courses.updateOne(
+            { _id: req.params.id},
+            req.body
+        )
+        .then(() => res.redirect('/me/stored/courses'))
+        .catch(next)
+
+       
     }
 
 

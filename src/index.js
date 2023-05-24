@@ -2,6 +2,7 @@ const express = require('express');
 const expressHandlebars = require('express-handlebars');
 const handlebars = expressHandlebars.engine;
 const morgan = require('morgan');
+const methodOverride = require('method-override');
 const path = require('path');
 const db = require('./config/db')
 
@@ -18,13 +19,20 @@ app.use(express.static(path.join(__dirname, 'resource/publice')));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+app.use(methodOverride('_method'));
+
 // HTTP Logger
 // app.use(morgan('combined'));
 
 //templet engine
 
 app.engine('hbs', handlebars());
-app.engine('.hbs', handlebars({ extname: '.hbs' }));
+app.engine('.hbs', handlebars({ 
+    extname: '.hbs' ,
+    helpers: {
+        sum: (a,b) => a + b,
+    }
+}));
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resource','views'));
 
